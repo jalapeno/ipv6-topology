@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	IPv4TopologyEventTopic = "jalapeno.ipv4_topology_events"
+	IPv6TopologyEventTopic = "jalapeno.ipv6_topology_events"
 )
 
 var (
@@ -29,7 +29,7 @@ var (
 	// topics defines a list of topic to initialize and connect,
 	// initialization is done as a part of NewKafkaPublisher func.
 	topicNames = []string{
-		IPv4TopologyEventTopic,
+		IPv6TopologyEventTopic,
 	}
 )
 
@@ -53,15 +53,15 @@ type notifier struct {
 func (n *notifier) EventNotification(msg *EventMessage) error {
 	switch msg.TopicType {
 	case bmp.LSNodeMsg:
-		return n.triggerNotification(IPv4TopologyEventTopic, msg)
+		return n.triggerNotification(IPv6TopologyEventTopic, msg)
 	case bmp.LSLinkMsg:
-		return n.triggerNotification(IPv4TopologyEventTopic, msg)
+		return n.triggerNotification(IPv6TopologyEventTopic, msg)
 	case bmp.LSPrefixMsg:
-		return n.triggerNotification(IPv4TopologyEventTopic, msg)
+		return n.triggerNotification(IPv6TopologyEventTopic, msg)
 	case bmp.UnicastPrefixV4Msg:
-		return n.triggerNotification(IPv4TopologyEventTopic, msg)
+		return n.triggerNotification(IPv6TopologyEventTopic, msg)
 	case bmp.PeerStateChangeMsg:
-		return n.triggerNotification(IPv4TopologyEventTopic, msg)
+		return n.triggerNotification(IPv6TopologyEventTopic, msg)
 	}
 
 	return fmt.Errorf("unknown topic type %d", msg.TopicType)

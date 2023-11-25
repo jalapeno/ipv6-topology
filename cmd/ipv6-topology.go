@@ -62,8 +62,8 @@ func init() {
 	flag.StringVar(&lsnodeExtCollection, "lsnodeExtended-name", "ls_node_extended", "ls_node_extended Collection name, default: \"ls_node_extended\"")
 	flag.StringVar(&ebgpPeerCollection, "ebgp-name", "ebgp_peer_v6", "eBGP Peer Collection name, default \"ebgp_peer_v6\"")
 	flag.StringVar(&ebgpSessionCollection, "ebgp-session-name", "ebgp_session_v6", "eBGP session Collection name, default \"ebgp_session_v6\"")
-	flag.StringVar(&inetPrefixV6Collection, "inetv6-prefix-name", "inet_prefix_v6", "inet prefix v4 Collection name, default \"inet_prefix_v6\"")
-	flag.StringVar(&lsTopologyV6Collection, "ls-topology", "ls_topology_v4", "Edge Collection name, default \"ls_topology_v6\"")
+	flag.StringVar(&inetPrefixV6Collection, "inetv6-prefix-name", "inet_prefix_v6", "inet prefix v6 Collection name, default \"inet_prefix_v6\"")
+	flag.StringVar(&lsTopologyV6Collection, "ls-topology", "ls_topology_v6", "Edge Collection name, default \"ls_topology_v6\"")
 	flag.StringVar(&ipv6TopologyCollection, "ipv6-topology", "ipv6_topology", "Edge Collection name, default \"ipv6_topology\"")
 }
 

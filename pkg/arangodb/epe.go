@@ -41,7 +41,7 @@ func (a *arangoDB) processEPE(ctx context.Context, key string, e *message.LSLink
 	}
 	//glog.Infof("ls_node: %+v to correlate with EPE ls_link: %+v", ln.Key, e.Key)
 
-	// query = "for d in ebgp_session_v4" +
+	// query = "for d in ebgp_session_v6" +
 	// 	" filter d.remote_bgp_id == " + "\"" + e.BGPRemoteRouterID + "\"" +
 	// 	" filter d.remote_ip == " + "\"" + e.RemoteLinkIP + "\""
 	// query += " return d"

@@ -49,7 +49,7 @@ func (a *arangoDB) lsLinkHandler(obj *kafkanotifier.EventMessage) error {
 			return fmt.Errorf("failed to process action %s for edge %s with error: %+v", obj.Action, obj.Key, err)
 		}
 	}
-	// write event into ls_topoogy_v4 topic
+	// write event into ls_topoogy_v6 topic
 	a.notifier.EventNotification(obj)
 
 	return nil

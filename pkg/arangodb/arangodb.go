@@ -91,12 +91,12 @@ func NewDBSrvClient(arangoSrv, user, pass, dbname, lslink string, lsprefix strin
 
 	// Check if original ls_topology collection exists, if not fail as Jalapeno topology is not running
 	arango.lstopoV6, err = arango.db.Graph(context.TODO(), lstopoV6)
-	glog.Infof("lsv4 topo collection found %+v", lstopoV6)
+	glog.Infof("lsv6 topo collection found %+v", lstopoV6)
 	if err != nil {
 		return nil, err
 	}
 
-	// check for ipv4 topology graph
+	// check for ipv6 topology graph
 	found, err := arango.db.GraphExists(context.TODO(), ipv6topo)
 	if err != nil {
 		return nil, err
@@ -246,7 +246,7 @@ func (a *arangoDB) loadEdge() error {
 		} else if err != nil {
 			return err
 		}
-		//glog.Infof("get ipv4 epe_link: %s", p.Key)
+		//glog.Infof("get ipv6 epe_link: %s", p.Key)
 		if err := a.processEPE(ctx, meta.Key, &p); err != nil {
 			glog.Errorf("failed to process key: %s with error: %+v", meta.Key, err)
 			continue
