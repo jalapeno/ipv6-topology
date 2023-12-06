@@ -9,12 +9,19 @@ import (
 )
 
 func (a *arangoDB) processIBGPPrefix(ctx context.Context, key string, e *LSNodeExt) error {
+	// query := "for l in unicast_prefix_v6" +
+	// 	" filter l.peer_ip == " + "\"" + e.RouterID + "\"" +
+	// 	" filter l.nexthop == l.peer_ip filter l.origin_as == Null " +
+	// 	" filter l.prefix_len != 128 filter l.prefix == " + "\"::\""
+	// query += " return l	"
+
 	query := "for l in unicast_prefix_v6" +
 		" filter l.peer_ip == " + "\"" + e.RouterID + "\"" +
-		" filter l.nexthop == l.peer_ip filter l.origin_as == Null " +
-		" filter l.prefix_len != 128 filter l.prefix == " + "\"::\""
+		" || l.peer_ip == " + "\"" + e.RouterIDv6 + "\"" +
+		" filter l.prefix_len != 128 filter l.base_attrs.local_pref != null "
 	query += " return l	"
 	pcursor, err := a.db.Query(ctx, query, nil)
+	//glog.Infof("query: %+v", query)
 	if err != nil {
 		return err
 	}

@@ -59,6 +59,7 @@ type LSNodeExt struct {
 	Timestamp            string                          `json:"timestamp,omitempty"`
 	IGPRouterID          string                          `json:"igp_router_id,omitempty"`
 	RouterID             string                          `json:"router_id,omitempty"`
+	RouterIDv6           string                          `json:"router_id_v6,omitempty"`
 	ASN                  uint32                          `json:"asn,omitempty"`
 	LSID                 uint32                          `json:"ls_id,omitempty"`
 	MTID                 []*base.MultiTopologyIdentifier `json:"mt_id_tlv,omitempty"`
