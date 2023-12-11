@@ -40,15 +40,9 @@ func (a *arangoDB) processEPE(ctx context.Context, key string, e *message.LSLink
 		}
 	}
 	//glog.Infof("ls_node: %+v to correlate with EPE ls_link: %+v", ln.Key, e.Key)
-
-	// query = "for d in ebgp_session_v6" +
-	// 	" filter d.remote_bgp_id == " + "\"" + e.BGPRemoteRouterID + "\"" +
-	// 	" filter d.remote_ip == " + "\"" + e.RemoteLinkIP + "\""
-	// query += " return d"
-	query = "for d in ebgp_peer_v6" +
+	query = "for d in peer" +
 		" filter d.bgp_router_id == " + "\"" + e.BGPRemoteRouterID + "\""
 	query += " return d"
-	//glog.Infof("query peer collection for router id matching lslink bgp_remote_router_id: %+v and remotelinkIP: %+v", e.BGPRemoteRouterID, e.RemoteLinkIP)
 	rcursor, err := a.db.Query(ctx, query, nil)
 	if err != nil {
 		return err

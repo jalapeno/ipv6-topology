@@ -28,16 +28,16 @@ const (
 )
 
 var (
-	msgSrvAddr             string
-	dbSrvAddr              string
-	dbName                 string
-	dbUser                 string
-	dbPass                 string
-	lslinkCollection       string
-	lsprefixCollection     string
-	lsnodeExtCollection    string
-	ebgpPeerCollection     string
-	ebgpSessionCollection  string
+	msgSrvAddr          string
+	dbSrvAddr           string
+	dbName              string
+	dbUser              string
+	dbPass              string
+	lslinkCollection    string
+	lsprefixCollection  string
+	lsnodeExtCollection string
+	bgpNodeCollection   string
+	// ebgpSessionCollection  string
 	inetPrefixV6Collection string
 	lsTopologyV6Collection string
 	ipv6TopologyCollection string
@@ -45,8 +45,8 @@ var (
 
 func init() {
 	runtime.GOMAXPROCS(1)
-	// flag.StringVar(&msgSrvAddr, "message-server", "198.18.133.104:30092", "URL to the messages supplying server")
-	// flag.StringVar(&dbSrvAddr, "database-server", "http://198.18.133.104:30852", "{dns name}:port or X.X.X.X:port of the graph database")
+	// flag.StringVar(&msgSrvAddr, "message-server", "198.18.133.103:30092", "URL to the messages supplying server")
+	// flag.StringVar(&dbSrvAddr, "database-server", "http://198.18.133.103:30852", "{dns name}:port or X.X.X.X:port of the graph database")
 	// flag.StringVar(&dbName, "database-name", "jalapeno", "DB name")
 	// flag.StringVar(&dbUser, "database-user", "root", "DB User name")
 	// flag.StringVar(&dbPass, "database-pass", "jalapeno", "DB User's password")
@@ -60,8 +60,7 @@ func init() {
 	flag.StringVar(&lslinkCollection, "edge-name", "ls_link", "Edge Collection name, default \"ls_link\"")
 	flag.StringVar(&lsprefixCollection, "prefix-name", "ls_prefix", "Prefix Collection name, default \"ls_prefix\"")
 	flag.StringVar(&lsnodeExtCollection, "lsnodeExtended-name", "ls_node_extended", "ls_node_extended Collection name, default: \"ls_node_extended\"")
-	flag.StringVar(&ebgpPeerCollection, "ebgp-name", "ebgp_peer_v6", "eBGP Peer Collection name, default \"ebgp_peer_v6\"")
-	flag.StringVar(&ebgpSessionCollection, "ebgp-session-name", "ebgp_session_v6", "eBGP session Collection name, default \"ebgp_session_v6\"")
+	flag.StringVar(&bgpNodeCollection, "bgp-name", "bgp_node", "BGP Peer Collection name, default \"bgp_node\"")
 	flag.StringVar(&inetPrefixV6Collection, "inetv6-prefix-name", "inet_prefix_v6", "inet prefix v6 Collection name, default \"inet_prefix_v6\"")
 	flag.StringVar(&lsTopologyV6Collection, "ls-topology", "ls_topology_v6", "Edge Collection name, default \"ls_topology_v6\"")
 	flag.StringVar(&ipv6TopologyCollection, "ipv6-topology", "ipv6_topology", "Edge Collection name, default \"ipv6_topology\"")
@@ -108,8 +107,8 @@ func main() {
 	}
 
 	dbSrv, err := arangodb.NewDBSrvClient(dbSrvAddr, dbUser, dbPass, dbName, lslinkCollection,
-		lsprefixCollection, lsnodeExtCollection, ebgpPeerCollection,
-		ebgpSessionCollection, inetPrefixV6Collection, lsTopologyV6Collection, ipv6TopologyCollection, notifier)
+		lsprefixCollection, lsnodeExtCollection, bgpNodeCollection,
+		inetPrefixV6Collection, lsTopologyV6Collection, ipv6TopologyCollection, notifier)
 	if err != nil {
 		glog.Errorf("failed to initialize database client with error: %+v", err)
 		os.Exit(1)
